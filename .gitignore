@@ -1,0 +1,7 @@
+BNRHookAction.xcodeproj/xcuserdata/
+BNRHookAction.xcworkspace/
+Pods/
+*.swp
+Podfile.lock
+.DS_Store
+BNRHookAction.xcodeproj/project.xcworkspace/xcuserdata/

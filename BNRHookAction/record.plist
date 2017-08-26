@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ViewController</key>
+	<dict>
+		<key>viewDidAppear:</key>
+		<dict>
+			<key>methodType</key>
+			<integer>0</integer>
+			<key>eventId</key>
+			<string>viewDidAppear:_id</string>
+		</dict>
+		<key>testFuncWithOutParams</key>
+		<dict>
+			<key>eventId</key>
+			<string>testFuncWithOutParams_id</string>
+		</dict>
+		<key>testFuncWithId:</key>
+		<dict>
+			<key>eventId</key>
+			<string>testFuncWithId:_id</string>
+		</dict>
+		<key>testFuncWithBaseParam:</key>
+		<dict>
+			<key>eventId</key>
+			<string>testFuncWithBaseParam:_id</string>
+		</dict>
+		<key>testFuncWithParam0:andParam1:</key>
+		<dict>
+			<key>eventId</key>
+			<string>testFuncWithParam0:andParam1:_id</string>
+		</dict>
+		<key>testFuncWithBlock:</key>
+		<dict>
+			<key>eventId</key>
+			<string>testFuncWithBlock:_id</string>
+		</dict>
+		<key>classMethod</key>
+		<dict>
+			<key>eventId</key>
+			<string>classMethod</string>
+		</dict>
+	</dict>
+	<key>TestVC</key>
+	<dict>
+		<key>viewWillDisAppear:</key>
+		<dict>
+			<key>methodType</key>
+			<integer>0</integer>
+			<key>eventId</key>
+			<string>TestVC的viewWillDisAppear</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
