@@ -139,7 +139,7 @@ void setInvocationParam(NSInvocation *invocation,int index,va_list list,char *ty
     
     if (strcmp(type, @encode(CGFloat)) == 0||
         strcmp(type, @encode(float)) == 0) {
-        CGFloat param = va_arg(list, CGFloat);
+        CGFloat param = va_arg(list, double);
         [invocation setArgument:&param atIndex:index];
         return;
     }
