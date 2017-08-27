@@ -41,16 +41,15 @@
             Method originMethod = class_getInstanceMethod(classInstance, NSSelectorFromString(actionName));
             if (originMethod) {
              class_addMethod(classInstance,
-                                NSSelectorFromString([NSString stringWithFormat:@"hook_%@",actionName]),
+                                NSSelectorFromString([NSString stringWithFormat:@"bnrHook_%@",actionName]),
                                 method_getImplementation(originMethod),
                                 method_getTypeEncoding(originMethod));
                 method_setImplementation(originMethod, (IMP)hookFunc);
             }else{
                 originMethod = class_getClassMethod(classInstance, NSSelectorFromString(actionName));
                 if (originMethod) {
-//                    const char *classChar = className.UTF8String;
                     class_addMethod(objc_getMetaClass(className.UTF8String),
-                                    NSSelectorFromString([NSString stringWithFormat:@"hook_%@",actionName]),
+                                    NSSelectorFromString([NSString stringWithFormat:@"bnrHook_%@",actionName]),
                                     method_getImplementation(originMethod),
                                     method_getTypeEncoding(originMethod));
                     method_setImplementation(originMethod, (IMP)hookFunc);
@@ -72,7 +71,7 @@ void* hookFunc(id self, SEL _cmd,...){
     NSDictionary *actionInfo = actionDic[actionName];
     !record.hookBlock?:record.hookBlock(className,actionName,actionInfo);
    
-    SEL hookSelect = NSSelectorFromString([NSString stringWithFormat:@"hook_%@",NSStringFromSelector(_cmd)]);
+    SEL hookSelect = NSSelectorFromString([NSString stringWithFormat:@"bnrHook_%@",NSStringFromSelector(_cmd)]);
     
     if ([self respondsToSelector:hookSelect]) {
         

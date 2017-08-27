@@ -18,24 +18,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"record" ofType:@"plist"];
-    NSDictionary *recordDic = [NSDictionary dictionaryWithContentsOfFile:path];
-    [[BNRHookAction shareInstance] setRecordDic:recordDic
-                                   andHookBlock:^(NSString *target, NSString *action, NSDictionary *handleDic) {
-                                       NSLog(@"xxxx--%@",action);
-                                   }];
-    
+       
     [self testFuncWithOutParams];
-    [self testFuncWithId:@"我是一个id类型"];
-    NSLog(@"testFuncWithBaseParam 的返回值是:%@",@([self testFuncWithBaseParam:10]));
+    [self testFuncWithId:@"id type"];
+    NSLog(@"return value of testFuncWithBaseParam:%@",@([self testFuncWithBaseParam:10]));
     
-    NSLog(@"testFuncWithParam0:andParam1: 的返回值是:%@",[self testFuncWithParam0:@[@1,@2] andParam1:YES]);
+    NSLog(@"return value of testFuncWithParam0:andParam1:%@",[self testFuncWithParam0:@[@1,@2] andParam1:YES]);
     [self testFuncWithBlock:^(BOOL flag) {
-        NSLog(@"我是回调block %@",@(flag));
+        NSLog(@"called block whit param :%@",@(flag));
     }];
     [ViewController classMethod];
     [self noHookFunc];
+
 }
+
 -(void)testFuncWithOutParams{
     NSLog(@"%s",__func__);
 }
@@ -49,7 +45,6 @@
 
 -(id)testFuncWithParam0:(NSArray *)param0 andParam1:(BOOL)flag{
     NSLog(@"%s %@ %@",__func__,param0,@(flag));
-    //    return flag?@"返回YES":@"返回NO";
     return nil;
 }
 -(void)testFuncWithBlock:(void (^)(BOOL flag))block{

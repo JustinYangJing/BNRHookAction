@@ -44,12 +44,17 @@
 	</dict>
 	<key>TestVC</key>
 	<dict>
-		<key>viewWillDisAppear:</key>
+		<key>viewWillDisappear:</key>
 		<dict>
 			<key>methodType</key>
 			<integer>0</integer>
 			<key>eventId</key>
-			<string>TestVC的viewWillDisAppear</string>
+			<string>TestVC的viewWillDisappear</string>
+		</dict>
+		<key>hookBtnHandle:</key>
+		<dict>
+			<key>eventId</key>
+			<string>hookBtnHandle</string>
 		</dict>
 	</dict>
 </dict>

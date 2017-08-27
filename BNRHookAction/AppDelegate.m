@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import <UMengAnalytics/UMMobClick/MobClick.h>
+#import "BNRHookAction.h"
 @interface AppDelegate ()
 
 @end
@@ -17,10 +18,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self umengConfig];
     return YES;
 }
+-(void)umengConfig{
+    UMConfigInstance.appKey = @"xxxxxx";
+    UMConfigInstance.channelId = @"App Store";
+    [MobClick startWithConfigure:UMConfigInstance];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"record" ofType:@"plist"];
+    NSDictionary *recordDic = [NSDictionary dictionaryWithContentsOfFile:path];
+    [[BNRHookAction shareInstance] setRecordDic:recordDic
+                                   andHookBlock:^(NSString *target, NSString *action, NSDictionary *handleDic) {
+                                       NSString *eventId = handleDic[@"eventId"];
+                                       if ([eventId isKindOfClass:[NSString class]]) {
+                                           NSLog(@"hook %@",action);
+                                           [MobClick event:eventId];
+                                       }
+                                   }];
 
-
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

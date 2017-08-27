@@ -6,5 +6,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'BNRHookAction' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
-
+  pod 'UMengAnalytics'
 end
