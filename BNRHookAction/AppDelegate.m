@@ -36,6 +36,23 @@
                                            [MobClick event:eventId];
                                        }
                                    }];
+    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"hookWithoutCallOriginFunc" ofType:@"plist"];
+    NSDictionary *recordDic1 = [NSDictionary dictionaryWithContentsOfFile:path1];
+    [[BNRHookAction shareInstance] setRecordDic:recordDic1 andWithOutCallOriginFuncHookBlock:^void *(NSString *target, NSString *action, NSDictionary *handleDic, NSDictionary *params) {
+        if ([target isEqualToString:@"TestVC"])
+        {
+            if ([action isEqualToString:@"hookBtnHandle:"]) {
+                NSLog(@"hook hookBtnHandle:");
+                return 0;
+            }
+            if ([action isEqualToString:@"testFuncWithIdParams:"]) {
+                NSString *param = params[@"1"];
+                int value = [param intValue];
+                return value;
+            }
+        }
+        return 0;
+    }];
 
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

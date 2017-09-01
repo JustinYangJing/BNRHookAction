@@ -20,6 +20,16 @@
 @property (nonatomic,copy) void (^hookBlock)(NSString *target,NSString *action,NSDictionary *handleDic);
 
 /**
+ *  hook的字典，该字典中申明的action,不会再被调用
+ */
+@property(nonatomic,readonly,copy) NSDictionary *hookWithoutCallOriginDic;
+/**
+ *  有些情况不需要调用原来的函数，只要调用hook的这个block,原函数的参数会通过params传出来
+ *  原函数可能要求返回值，那么请在您提供的block里面为原函数提供返回值
+ */
+@property (nonatomic,copy) void *(^hookBlockWithoutCallOriginFunc)(NSString *target,NSString *action,NSDictionary *handleDic,NSDictionary *params);
+
+/**
  *  类方法
  *
  *  @return 返回BNRHookAction实例
@@ -59,4 +69,13 @@
 -(void)setRecordDic:(NSDictionary *)recordDic andHookBlock:(void (^)(NSString *target,
                                                                      NSString *action,
                                                                      NSDictionary *handleDic))handleBlock;
+
+/**
+ *  函数说明同上，只是调用这个函数hook后，调用了block后，不会再调原来的函数
+ */
+-(void)setRecordDic:(NSDictionary *)recordDic
+andWithOutCallOriginFuncHookBlock:(void *(^)(NSString *target,
+                                             NSString *action,
+                                             NSDictionary *handleDic,
+                                             NSDictionary *params))handleBlock;
 @end

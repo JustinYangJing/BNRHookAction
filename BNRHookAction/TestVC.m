@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"%@",@([self testFuncWithIdParams:@"1111"]));
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,7 +30,11 @@
     NSLog(@"%s",__func__);
 }
 - (IBAction)hookBtnHandle:(id)sender {
-    
+    NSLog(@"should not print");
+}
+
+-(int)testFuncWithIdParams:(id)param{
+    return 3;
 }
 /*
 #pragma mark - Navigation

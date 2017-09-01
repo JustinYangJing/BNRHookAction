@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BAF4DD21F592D7200664BBB /* hookWithoutCallOriginFunc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BAF4DD11F592D7200664BBB /* hookWithoutCallOriginFunc.plist */; };
 		1BD3196F1F51B9B3000EA387 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD3196E1F51B9B3000EA387 /* main.m */; };
 		1BD319721F51B9B3000EA387 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD319711F51B9B3000EA387 /* AppDelegate.m */; };
 		1BD319751F51B9B3000EA387 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD319741F51B9B3000EA387 /* ViewController.m */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		10F62EC4B6A36AF9CF2E575B /* Pods-BNRHookAction.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNRHookAction.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BNRHookAction/Pods-BNRHookAction.debug.xcconfig"; sourceTree = "<group>"; };
+		1BAF4DD11F592D7200664BBB /* hookWithoutCallOriginFunc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hookWithoutCallOriginFunc.plist; sourceTree = "<group>"; };
 		1BD3196A1F51B9B3000EA387 /* BNRHookAction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BNRHookAction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD3196E1F51B9B3000EA387 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1BD319701F51B9B3000EA387 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				1BD3197B1F51B9B3000EA387 /* LaunchScreen.storyboard */,
 				1BD3197E1F51B9B3000EA387 /* Info.plist */,
 				1BD3196D1F51B9B3000EA387 /* Supporting Files */,
+				1BAF4DD11F592D7200664BBB /* hookWithoutCallOriginFunc.plist */,
 			);
 			path = BNRHookAction;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			files = (
 				1BD3197D1F51B9B3000EA387 /* LaunchScreen.storyboard in Resources */,
 				1BD3197A1F51B9B3000EA387 /* Assets.xcassets in Resources */,
+				1BAF4DD21F592D7200664BBB /* hookWithoutCallOriginFunc.plist in Resources */,
 				1BD319861F51C129000EA387 /* BNRHookAction.podspec in Resources */,
 				1BD319781F51B9B3000EA387 /* Main.storyboard in Resources */,
 				1BD3198B1F51C214000EA387 /* record.plist in Resources */,

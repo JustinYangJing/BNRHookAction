@@ -150,4 +150,106 @@ void setInvocationParam(NSInvocation *invocation,int index,va_list list,char *ty
     }
 }
 
+
+-(void)setRecordDic:(NSDictionary *)recordDic
+    andWithOutCallOriginFuncHookBlock:(void *(^)(NSString *target,
+                                                NSString *action,
+                                                NSDictionary *handleDic,
+                                                NSDictionary *params))handleBlock{
+    
+    _hookWithoutCallOriginDic = recordDic;
+    self.hookBlockWithoutCallOriginFunc = handleBlock;
+    NSArray *allKeys = self.hookWithoutCallOriginDic.allKeys;
+    for (NSString *className in allKeys) {
+        NSDictionary *actionDic = self.hookWithoutCallOriginDic[className];
+        Class classInstance = NSClassFromString(className);
+        NSArray *actionKeys = actionDic.allKeys;
+        for (NSString *actionName in actionKeys) {
+            Method originMethod = class_getInstanceMethod(classInstance, NSSelectorFromString(actionName));
+            if (originMethod) {
+                    method_setImplementation(originMethod, (IMP)hookFuncWithOutCallOriginFunc);
+            }else{
+                originMethod = class_getClassMethod(classInstance, NSSelectorFromString(actionName));
+                if (originMethod) {
+                    method_setImplementation(originMethod, (IMP)hookFuncWithOutCallOriginFunc);
+                }
+                
+            }
+            
+        }
+        
+    }
+
+    
+}
+
+void* hookFuncWithOutCallOriginFunc(id self, SEL _cmd,...){
+    BNRHookAction *record = [BNRHookAction shareInstance];
+    NSString *className = NSStringFromClass([self class]);
+    NSDictionary *actionDic = record.hookWithoutCallOriginDic[className];
+    NSString *actionName = NSStringFromSelector(_cmd);
+    NSDictionary *actionInfo = actionDic[actionName];
+    
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"self"] = self;
+    params[@"_cmd"] = NSStringFromSelector(_cmd);
+    
+    Method originMethod = class_getInstanceMethod([self class], _cmd);
+    if (originMethod == nil) {
+        originMethod = class_getClassMethod(self, _cmd);
+    }
+    unsigned int argsCount = method_getNumberOfArguments(originMethod);
+    va_list args;
+    va_start(args, _cmd);
+    
+    
+    for (int i = 2; i < argsCount; i++) {
+        char *paramType = method_copyArgumentType(originMethod, i);
+        id param = getParam(i, args, paramType);
+        params[[NSString stringWithFormat:@"%@",@(i-1)]] = param;
+    }
+    va_end(args);
+    if (record.hookBlockWithoutCallOriginFunc) {
+       void *value = record.hookBlockWithoutCallOriginFunc(className,actionName,actionInfo,params.copy);
+        return value;
+    }else{
+        return 0;
+    }
+}
+
+//得到形参的值
+id getParam(int index,va_list list,char *type){
+    if (strcmp(type, @encode(id)) == 0) {
+        id param = va_arg(list, id);
+        return param;
+    }
+    if (strcmp(type, @encode(NSInteger)) == 0 ||
+        strcmp(type, @encode(SInt8)) == 0  ||
+        strcmp(type, @encode(SInt16)) == 0 ||
+        strcmp(type, @encode(SInt32)) == 0 ||
+        strcmp(type, @encode(BOOL)) == 0 ) {
+        NSInteger param = va_arg(list, NSInteger);
+        return @(param);
+    }
+    if (strcmp(type, @encode(NSUInteger)) == 0 ||
+        strcmp(type, @encode(UInt8)) == 0  ||
+        strcmp(type, @encode(UInt16)) == 0 ||
+        strcmp(type, @encode(UInt32)) == 0 ) {
+        NSUInteger param = va_arg(list, NSUInteger);
+        return @(param);
+    }
+    
+    if (strcmp(type, @encode(CGFloat)) == 0||
+        strcmp(type, @encode(float)) == 0) {
+        CGFloat param = va_arg(list, double);
+        return @(param);
+    }
+    if (strcmp(type,@encode(void (^)())) == 0) {
+        id param = va_arg(list, id);
+        return param;
+    }
+    return @(0);
+}
+
 @end
