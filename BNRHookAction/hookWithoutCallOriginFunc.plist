@@ -2,11 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TestVC</key>
+	<key>ChildVC</key>
 	<dict>
-		<key>hookBtnHandle:</key>
+		<key>printSomething</key>
 		<dict/>
-		<key>testFuncWithIdParams:</key>
+		<key>backAction</key>
+		<dict/>
+		<key>classMethod:</key>
+		<dict/>
+	</dict>
+	<key>ChildVC1</key>
+	<dict>
+		<key>printSomething</key>
 		<dict/>
 	</dict>
 </dict>

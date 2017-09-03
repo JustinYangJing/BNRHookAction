@@ -51,6 +51,10 @@
 			<key>eventId</key>
 			<string>TestVC的viewWillDisappear</string>
 		</dict>
+		<key>viewDidAppear:</key>
+		<dict/>
+		<key>hookBtnHandle:</key>
+		<dict/>
 	</dict>
 </dict>
 </plist>

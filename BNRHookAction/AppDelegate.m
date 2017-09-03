@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <UMengAnalytics/UMMobClick/MobClick.h>
 #import "BNRHookAction.h"
+#import <objc/runtime.h>
 @interface AppDelegate ()
 
 @end
@@ -19,39 +20,37 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self umengConfig];
+    
     return YES;
 }
 -(void)umengConfig{
     UMConfigInstance.appKey = @"xxxxxx";
     UMConfigInstance.channelId = @"App Store";
     [MobClick startWithConfigure:UMConfigInstance];
-    
+
     NSString *path = [[NSBundle mainBundle] pathForResource:@"record" ofType:@"plist"];
-    NSDictionary *recordDic = [NSDictionary dictionaryWithContentsOfFile:path];
-    [[BNRHookAction shareInstance] setRecordDic:recordDic
-                                   andHookBlock:^(NSString *target, NSString *action, NSDictionary *handleDic) {
-                                       NSString *eventId = handleDic[@"eventId"];
-                                       if ([eventId isKindOfClass:[NSString class]]) {
-                                           NSLog(@"hook %@",action);
-                                           [MobClick event:eventId];
-                                       }
-                                   }];
     NSString *path1 = [[NSBundle mainBundle] pathForResource:@"hookWithoutCallOriginFunc" ofType:@"plist"];
+    
+    NSDictionary *recordDic = [NSDictionary dictionaryWithContentsOfFile:path];
     NSDictionary *recordDic1 = [NSDictionary dictionaryWithContentsOfFile:path1];
+    [[BNRHookAction shareInstance] setRecordDic:recordDic
+                                   andHookBlock:^(NSString *target,
+                                                  NSString *action,
+                                                  NSDictionary *handleDic,
+                                                  NSDictionary *params) {
+                                       NSLog(@"hook %@ %@",target,action);
+                                   }];
+    
+    
     [[BNRHookAction shareInstance] setRecordDic:recordDic1 andWithOutCallOriginFuncHookBlock:^void *(NSString *target, NSString *action, NSDictionary *handleDic, NSDictionary *params) {
-        if ([target isEqualToString:@"TestVC"])
+        if ([target isEqualToString:@"ChildVC"])
         {
-            if ([action isEqualToString:@"hookBtnHandle:"]) {
-                NSLog(@"hook hookBtnHandle:");
-                return 0;
-            }
-            if ([action isEqualToString:@"testFuncWithIdParams:"]) {
-                NSString *param = params[@"1"];
-                int value = [param intValue];
-                return value;
+            if ([action isEqualToString:@"backAction"]) {
+                NSLog(@"hook backAction");
+                return nil;
             }
         }
-        return 0;
+        return nil;
     }];
 
 }

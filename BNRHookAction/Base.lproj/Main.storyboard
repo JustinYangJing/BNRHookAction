@@ -45,6 +45,14 @@
                                     <segue destination="oYX-Vt-Q8d" kind="show" id="pc9-XM-gke"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDj-po-luB">
+                                <rect key="frame" x="95" y="448" width="157" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="只hook，不调用原方法"/>
+                                <connections>
+                                    <action selector="pushFatherVC:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B39-2s-CD6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -57,7 +65,7 @@
         <!--TestVC-->
         <scene sceneID="b5v-2T-0lg">
             <objects>
-                <viewController id="oYX-Vt-Q8d" customClass="TestVC" sceneMemberID="viewController">
+                <viewController restorationIdentifier="testVC" storyboardIdentifier="testVC" id="oYX-Vt-Q8d" customClass="TestVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mgC-ma-cS3"/>
                         <viewControllerLayoutGuide type="bottom" id="Dhh-TN-CzL"/>

@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "BNRHookAction.h"
+
+#import "FatherVC.h"
 @interface ViewController ()
 
 @end
@@ -18,12 +19,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-       
     [self testFuncWithOutParams];
     [self testFuncWithId:@"id type"];
     NSLog(@"return value of testFuncWithBaseParam:%@",@([self testFuncWithBaseParam:10]));
     
-    NSLog(@"return value of testFuncWithParam0:andParam1:%@",[self testFuncWithParam0:@[@1,@2] andParam1:YES]);
+    NSLog(@"return value of testFuncWithParam0:andParam1:%@",[self testFuncWithParam0:nil andParam1:YES]);
     [self testFuncWithBlock:^(BOOL flag) {
         NSLog(@"called block whit param :%@",@(flag));
     }];
@@ -62,6 +62,15 @@
         NSLog(@"%@",a);
     };
     !test?:test(block);
+}
+- (IBAction)pushFatherVC:(id)sender {
+    FatherVC *vc = [FatherVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@"%s",__func__);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

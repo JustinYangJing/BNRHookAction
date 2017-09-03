@@ -13,7 +13,10 @@
 @end
 
 @implementation TestVC
-
+-(instancetype)init{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    return [sb instantiateViewControllerWithIdentifier:@"testVC"];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -24,18 +27,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@"%s",__func__);
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     NSLog(@"%s",__func__);
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    NSLog(@"%s",__func__);
+}
 - (IBAction)hookBtnHandle:(id)sender {
-    NSLog(@"should not print");
+    NSLog(@"%s",__func__);
 }
 
 -(int)testFuncWithIdParams:(id)param{
     return 3;
 }
+
+
 /*
 #pragma mark - Navigation
 

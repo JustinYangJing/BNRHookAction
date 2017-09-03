@@ -17,7 +17,7 @@
 /**
  *  hook的block,hook后的函数，会先调用这个block,再调用原函数
  */
-@property (nonatomic,copy) void (^hookBlock)(NSString *target,NSString *action,NSDictionary *handleDic);
+@property (nonatomic,copy) void (^hookBlock)(NSString *target,NSString *action,NSDictionary *handleDic,NSDictionary *params);
 
 /**
  *  hook的字典，该字典中申明的action,不会再被调用
@@ -64,11 +64,16 @@
  *
  *  @param handleBlock hook Block，
  *  hook参数 target：hook的是那个类， aciton:hook的那个函数，handleDic：
- *  {"key1":"value1";"key2":"value2"}，之前传入的字典。
+ *  {"key1":"value1";"key2":"value2"}，之前传入的字典;
+ *  params:被hook函数的参数,key="0","1"...,value为被hook函数参数的具体值，如params[@"0"]表示
+ *  被hook函数的第一个参数,params固定含有@"self"和@"_cmd"key,@"self"表示谁调用的函数，@"_cmd"表
+ *  示函数名
  */
--(void)setRecordDic:(NSDictionary *)recordDic andHookBlock:(void (^)(NSString *target,
-                                                                     NSString *action,
-                                                                     NSDictionary *handleDic))handleBlock;
+-(void)setRecordDic:(NSDictionary *)recordDic
+       andHookBlock:(void (^)(NSString *target,
+                              NSString *action,
+                              NSDictionary *handleDic,
+                              NSDictionary *params))handleBlock;
 
 /**
  *  函数说明同上，只是调用这个函数hook后，调用了block后，不会再调原来的函数
