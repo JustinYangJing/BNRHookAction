@@ -20,8 +20,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self umengConfig];
-    
     return YES;
+}
+
+void testFunc1(void *a, ...){
+    va_list args;
+    va_start(args, a);
+    for (int i = 0; i < 4;i++){
+        int x = va_arg(args, int);
+        NSLog(@"%d",x);
+    }
+    va_end(args);
 }
 -(void)umengConfig{
     UMConfigInstance.appKey = @"xxxxxx";
@@ -39,19 +48,15 @@
                                                   NSDictionary *handleDic,
                                                   NSDictionary *params) {
                                        NSLog(@"hook %@ %@",target,action);
+//                                       NSLog(@"%@",params);
                                    }];
     
     
-    [[BNRHookAction shareInstance] setRecordDic:recordDic1 andWithOutCallOriginFuncHookBlock:^void *(NSString *target, NSString *action, NSDictionary *handleDic, NSDictionary *params) {
-        if ([target isEqualToString:@"ChildVC"])
-        {
-            if ([action isEqualToString:@"backAction"]) {
-                NSLog(@"hook backAction");
-                return nil;
-            }
-        }
-        return nil;
-    }];
+//    [[BNRHookAction shareInstance] setRecordDic:recordDic andWithOutCallOriginFuncHookBlock:^void *(NSString *target, NSString *action, NSDictionary *handleDic, NSDictionary *params) {
+//        NSLog(@"hook %@ %@",target,action);
+//        NSLog(@"%@",params);
+//        return nil;
+//    }];
 
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

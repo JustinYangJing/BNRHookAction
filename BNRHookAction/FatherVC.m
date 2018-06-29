@@ -7,7 +7,7 @@
 //
 
 #import "FatherVC.h"
-#import "ChildVC.h"
+#import "ChildVC2.h"
 #import "ChildVC1.h"
 @interface FatherVC ()
 
@@ -20,24 +20,23 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一个界面" style:UIBarButtonItemStylePlain target:self action:@selector(nextVC)];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"Child1" style:UIBarButtonItemStylePlain target:self action:@selector(nextVC1)],
+        [[UIBarButtonItem alloc] initWithTitle:@"Child2" style:UIBarButtonItemStylePlain target:self action:@selector(nextVC2)]                                        ];
     self.view.backgroundColor = [UIColor whiteColor];
     
     [[self class] classMethod:@"class method param"];
-    [self printSomething];
+//    [self printSomething];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"ChildVC1" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [btn sizeToFit];
-    btn.center = self.view.center;
-    [btn addTarget:self action:@selector(pushChildVC1) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
 }
--(void)pushChildVC1{
+-(void)nextVC1{
     ChildVC1 *vc = [ChildVC1 new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+-(void)nextVC2{
+    ChildVC2 *vc = [[ChildVC2 alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 -(void)printSomething{
     NSLog(@"father printSomething");
 }
@@ -46,10 +45,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)nextVC{
-    ChildVC *vc = [[ChildVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

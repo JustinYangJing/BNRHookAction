@@ -4,13 +4,6 @@
 <dict>
 	<key>ViewController</key>
 	<dict>
-		<key>viewDidAppear:</key>
-		<dict>
-			<key>methodType</key>
-			<integer>0</integer>
-			<key>eventId</key>
-			<string>viewDidAppear:_id</string>
-		</dict>
 		<key>testFuncWithOutParams</key>
 		<dict>
 			<key>eventId</key>
@@ -41,19 +34,17 @@
 			<key>eventId</key>
 			<string>classMethod</string>
 		</dict>
-	</dict>
-	<key>TestVC</key>
-	<dict>
-		<key>viewWillDisappear:</key>
-		<dict>
-			<key>methodType</key>
-			<integer>0</integer>
-			<key>eventId</key>
-			<string>TestVC的viewWillDisappear</string>
-		</dict>
-		<key>viewDidAppear:</key>
+		<key>testFunc:::::</key>
 		<dict/>
-		<key>hookBtnHandle:</key>
+	</dict>
+	<key>ChildVC1</key>
+	<dict>
+		<key>printSomething</key>
+		<dict/>
+	</dict>
+	<key>ChildVC2</key>
+	<dict>
+		<key>printSomething</key>
 		<dict/>
 	</dict>
 </dict>

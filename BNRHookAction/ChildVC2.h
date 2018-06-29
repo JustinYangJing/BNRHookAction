@@ -1,5 +1,5 @@
 //
-//  ChildVC.h
+//  ChildVC2.h
 //  BNRHookAction
 //
 //  Created by JustinYang on 2017/9/2.
@@ -8,6 +8,6 @@
 
 #import "FatherVC.h"
 
-@interface ChildVC : FatherVC
+@interface ChildVC2 : FatherVC
 
 @end

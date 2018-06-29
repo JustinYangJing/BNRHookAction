@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ChildVC</key>
+	<key>ChildVC1</key>
 	<dict>
 		<key>printSomething</key>
 		<dict/>
@@ -11,7 +11,7 @@
 		<key>classMethod:</key>
 		<dict/>
 	</dict>
-	<key>ChildVC1</key>
+	<key>ChildVC2</key>
 	<dict>
 		<key>printSomething</key>
 		<dict/>
