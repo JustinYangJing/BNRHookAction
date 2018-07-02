@@ -1,13 +1,16 @@
 ## BNRHookAction
 
-- 根据字典hook调用的方法，之前您传入的block,再执行原函数，可以实现无侵入式埋点； 
-- 根据字典hook调用的方法，只会执行您传入的block,而不调用原函数
+- 根据字典`hook``OC`方法，先执行您传入的`block`,再执行原函数，可用于无侵入式埋点； 
+- 根据字典`hook``OC`方法，只会执行您传入的`block`,而不调用原函数,可用于修改函数的执行
 
 
 ### 注意事项
->不支持为父类和子类同时hook同一个函数(如A是父类，A1和A2是子类，A1实现了`viewWillAppear:`,A2未实现，同时hook A的`viewWillAppear:`和A1的`viewWillAppear:`会造成死循环; 同时hook A1和A2的`viewWillAppear:`也会造成调用的死循环，其实A2未实现`viewWillAppear:`,hook A2时，就是hook的A的`viewWillAppear:`. 如果子类不调用[super method]是不会造成调用死循环。)
+>- 不支持`hook`参数为结构体的函数
+>- 不支持父类子类`hook`同一个函数
+>- `hook`某类的某个方法，该类必须实现这个方法
+>- `arm64`结构上，`hook`的函数参数个有限制，最多8个非浮点类型参数和8个浮点类型参数
+>- 使用时，`hook`不成功的函数会打印出来，并列出原因
 
->hook函数时，请保证hook的target有实现hook的action,而不是父类实现了这个action.
 
 
 ### 引入
@@ -68,7 +71,10 @@
                  "key2":"value2"}
                  }
     			}
- 想要`hook` `className`下的`actionName`方法，`className`表示类名，`actionName`表示函数名，源码会根据这两个key值去hook。key1和value1，您可以自定义，比如做统计时,以eventId为key,在友盟或百度统计平台上自定义的事件Id为value,只要在传进来的block里面调用[MobClick event:value]就能做无侵入式埋点了，hook字典可以由后台下发。value也可以为block，调用您事先定义好的block
+想要`hook` `className`下的`actionName`方法，`className`表示类名，`actionName`表示函数名，源码会根据这两个key值去hook。key1和value1，您可以自定义，比如做统计时,以eventId为key,在友盟或百度统计平台上自定义的事件Id为value,只要在传进来的block里面调用[MobClick event:value]发送统计数据到友盟，hook字典可以由后台下发。value也可以为block，调用您事先定义好的block
+
+### 链接
+[`x86_64``arm32``arm64`传参分析](http://lifestyle1.cn/2018/06/14/iOS%E4%BA%A4%E6%8D%A2%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90/)
  
  
 
